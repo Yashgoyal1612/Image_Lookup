@@ -1,25 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
 
 function App() {
+  const [roll, setRoll] = useState("201500815");
+
+  const getRollNo = (e) => {
+    const studentRoll = e.target.value;
+    setRoll(studentRoll);
+  }
+
+  const link = `https://glauniversity.in:8103/${roll}.jpg`;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <h1>Student Image Lookup</h1>
+      <input
+        type="number"
+        placeholder='Enter University Roll No.'
+        onChange={getRollNo}
+      />
+      <div className="image">
+        <img src={link} alt="" />
+      </div>
     </div>
   );
 }
-
 export default App;
