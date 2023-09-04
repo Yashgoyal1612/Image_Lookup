@@ -81,6 +81,8 @@ function App() {
       setStudentInfo(null); // Clear studentInfo
       toast.error("Student details not found", {
         position: toast.POSITION.BOTTOM_CENTER,
+        autoClose: 1800,
+        theme: "dark",
       });
     }
   }
