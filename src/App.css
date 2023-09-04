@@ -3,7 +3,8 @@
 /* Container styles */
 body {
   font-family: Arial, sans-serif;
-  background-color: #121212; /* Dark background color */
+  /* background-image: linear-gradient(180deg, #ce0e0e 0%, #d82222 100%); */
+  background-image: url(./backimage.jpg);
   color: #fff; /* Light text color */
   margin: 0;
   padding: 0;
@@ -11,6 +12,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  transition: background-image 0.5s ease; /* Add a background transition animation */
 }
 
 .container {
@@ -19,31 +21,45 @@ body {
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease; /* Add a background color transition animation */
 }
 
 /* Input styles */
-input[type="number"] {
-  padding: 8px;
-  font-size: 16px;
-  margin-bottom: 10px;
-  border: 1px solid #333; /* Darker border color */
-  border-radius: 5px;
-  width: 95%;
-  background-color: #333; /* Darker input background color */
-  color: #fff; /* Light text color */
-  /* Remove up and down arrows (buttons) */
-  -moz-appearance: textfield;
-  appearance: none;
-  /* Adjust input height and remove extra padding */
-  height: 36px;
-  padding-left: 10px;
-  -moz-appearance: textfield;
+.input-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px; /* Adds gap between input and button */
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
+input[type="number"] {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #333; /* Darker border color */
+  border-radius: 5px;
+  width: 50%; /* Adjusted input width */
+  background-color: #333; /* Darker input background color */
+  color: #fff; /* Light text color */
   -webkit-appearance: none;
-  margin: 0;
+  -moz-appearance: textfield;
+  appearance: none;
+  height: 36px;
+}
+
+/* Button styles */
+button {
+  padding: 10px 20px;
+  background-color: #007bff; /* Blue button color */
+  color: #fff; /* White text color */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease; /* Add a button background color transition animation */
+}
+
+button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
 }
 
 /* Image styles */
@@ -52,4 +68,24 @@ input::-webkit-inner-spin-button {
   max-height: 300px;
   display: block;
   margin: 0 auto;
+  border-radius: 10px;
+}
+
+/* Student info styles */
+.student-info {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+}
+
+/* Darken the detail background color */
+.detail {
+  background-color: #000000; 
+  padding: 10px 10px;
+  border-radius: 10px;
+  transition: background-color 0.3s ease; /* Add a detail background color transition animation */
+}
+
+.detail:hover {
+  background-color: #333333; /* Darker background color on hover */
 }
