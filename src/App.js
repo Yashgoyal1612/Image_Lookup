@@ -81,7 +81,6 @@ function App() {
       setStudentInfo(null); // Clear studentInfo
       toast.error("Student details not found", {
         position: toast.POSITION.BOTTOM_CENTER,
-        
       });
     }
   }
@@ -94,7 +93,7 @@ function App() {
 
   return (
     <div className="container">
-      <h1>Student Image Lookup</h1>
+      <h1>Student Lookup</h1>
       <div className="input-container">
         <input
           type="number"
