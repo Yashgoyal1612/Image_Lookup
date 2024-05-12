@@ -1,5 +1,5 @@
 # Live at 
-## https://yashgoyal1612.github.io/Image_Lookup/
+### https://yashgoyal1612.github.io/Image_Lookup/
 
 # Getting Started with Create React App
 
