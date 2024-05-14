@@ -1,80 +1,37 @@
-// // App.js
-// import React, { useState } from 'react';
-// import './App.css';
-// import studentData from './StudentData';
-
-// function App() {
-//   const [roll, setRoll] = useState(""); // Default roll number for testing
-//   const [studentInfo, setStudentInfo] = useState(null); // State to store student information
-
-//   const getRollNo = (e) => {
-//     const studentRoll = e.target.value;
-//     setRoll(studentRoll);
-//   }
-
-//   const findStudentInfo = () => {
-//     const student = studentData.find((student) => student.UnivRollNo === parseInt(roll));
-//     if (student) {
-//       setStudentInfo(student);
-//     } else {
-//       setStudentInfo("Not Available");
-//     }
-//   }
-
-//   const handleKeyPress = (e) => {
-//     if (e.key === 'Enter') {
-//       findStudentInfo();
-//     }
-//   };
-
-//   return (
-//     <div className="container">
-//       <h1>Student Lookup</h1>
-//       <div className="input-container">
-//         <input
-//           type="number"
-//           placeholder='Enter University Roll No.'
-//           onChange={getRollNo}
-//           onKeyUp={handleKeyPress}
-//         />
-//         <button onClick={findStudentInfo}>Get Student Info</button>
-//       </div>
-//       {studentInfo && (
-//         <div className="student-info">
-//           <img src={`https://glauniversity.in:8103/${studentInfo.UnivRollNo}.jpg`} alt="Student" />
-//           <div className="detail">
-//             <p>Name: {studentInfo.Name}</p>
-//             <p>Father: {studentInfo.FatherName}</p>
-//             <p>Number: {studentInfo.StudentNo}</p>
-//             <p>Address: {studentInfo.Address}</p>
-//             <p>Email: {studentInfo.Email}</p>
-//           </div>
-//         </div>
-//       )}
-//     </div>
-//   );
-// }
-
-// export default App;
-
 import React, { useState } from 'react';
 import './App.css';
 import studentData from './StudentData';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
 function App() {
-  const [roll, setRoll] = useState(""); // Default roll number for testing
+  const [searchTerm, setSearchTerm] = useState(""); // State to store search term
+  const [searchField, setSearchField] = useState("UnivRollNo"); // Default search field
+
   const [studentInfo, setStudentInfo] = useState(null); // State to store student information
 
-  const getRollNo = (e) => {
-    const studentRoll = e.target.value;
-    setRoll(studentRoll);
+  const handleInputChange = (e) => {
+    setSearchTerm(e.target.value);
+  }
+
+  const handleSelectChange = (e) => {
+    setSearchField(e.target.value);
   }
 
   const findStudentInfo = () => {
-    const student = studentData.find((student) => student.UnivRollNo === parseInt(roll));
+    const student = studentData.find((student) => {
+      if (searchField === "UnivRollNo" || searchField === "StudentNo") {
+        return student[searchField] === parseInt(searchTerm);
+      } else {
+        const fieldValue = student[searchField];
+        if (typeof fieldValue === "string") {
+          return fieldValue.toLowerCase().includes(searchTerm.toLowerCase());
+        } else {
+          return false; // Return false for non-string fields like numbers
+        }
+      }
+    });
+
     if (student) {
       setStudentInfo(student);
     } else {
@@ -97,10 +54,17 @@ function App() {
     <div className="container">
       <h1>Student Lookup</h1>
       <div className="input-container">
+        <select onChange={handleSelectChange} value={searchField}>
+          <option value="UnivRollNo">University Roll No.</option>
+          <option value="Name">Name</option>
+          <option value="Email">Email</option>
+          <option value="FatherName">Father's Name</option>
+          <option value="StudentNo">Student No.</option>
+        </select>
         <input
-          type="number"
-          placeholder='Enter University Roll No.'
-          onChange={getRollNo}
+          type={searchField === "UnivRollNo" || searchField === "StudentNo" ? "number" : "text"}
+          placeholder={`Enter ${searchField}`}
+          onChange={handleInputChange}
           onKeyUp={handleKeyPress}
         />
         <button onClick={findStudentInfo}>Get Student Info</button>
@@ -122,4 +86,3 @@ function App() {
 }
 
 export default App;
-
